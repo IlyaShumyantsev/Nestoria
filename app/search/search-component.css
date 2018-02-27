@@ -1,0 +1,187 @@
+@font-face{
+	font-family: MachineC;
+	src: url(./styles/fonts/MachineC.otf);
+}
+
+@font-face{
+	font-family: PTSerifBold;
+	src: url(./styles/fonts/PTSerifBold.ttf);
+}
+
+@font-face{
+	font-family: Arial;
+	src: url(./styles/fonts/Arial.ttf);
+}
+
+div{
+    display: inline-block;
+    width: 100%;
+}
+
+div.search{
+    display: block;
+    max-width: 100%;
+}
+
+span.property-cross{
+    display: block;
+    float: left;
+    font-family: PTSerifBold;
+    font-size: 2rem;
+    color: rgb(100, 100, 100);
+}
+
+button.faves-button{
+    display: block;
+    float: right;
+    border: 0.1rem solid #efefef;
+    background-color: #ccc90d;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    text-align: left;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: #fff;
+}
+
+button.faves-button:hover{
+    cursor: pointer;
+    background-color: #e0dd16;
+}
+
+div.description{
+    display: block;
+    word-wrap: break-word;
+    max-width: 50%;
+    font-family: Arial;
+    font-size: 1rem;
+    color: rgb(99, 99, 99);
+}
+
+div.field{
+    display: inline-block;
+    max-width: 100%;
+}
+
+input.search-input{
+    max-width: 100%;
+    min-width: 335px;
+    max-height: 100px;
+    min-height: 30px;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.801);
+    background-color: #fff;
+    border: 2px solid #cccccc;
+    padding-left: 5px;
+}
+
+button.go-button, button.location-button{
+    display: inline-block;
+    border: 0.1rem solid #efefef;
+    background-color: #e6085d;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    text-align: left;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: #fff;
+}
+
+button.filter-button{
+    display: block;
+    border: 0.1rem solid #efefef;
+    background-color: #2499dd;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    text-align: left;
+    float: right;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: #fff;
+}
+
+input.filter-button, div.filter-block{
+    display: none;
+}
+
+input.filter-button:checked ~ div.filter-block{
+    display: block;
+}
+
+label.filter-lable{
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 35px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    text-align: left;
+    float: right;
+    display: block;
+    border: 0.1rem solid #efefef;
+    background-color: #2499dd;
+    text-align: left;
+}
+
+span.filter-span{
+    position: absolute;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    background: #2499dd;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.hide {
+    display: none; 
+}
+
+.hide + label ~ div{
+    display: none;
+}
+
+.hide + label {
+    border-bottom: 1px dotted green;
+    padding: 0;
+    color: green;
+    cursor: pointer;
+    display: inline-block; 
+}
+
+.hide:checked + label {
+    color: red;
+    border-bottom: 0;
+}
+
+.hide:checked + label + div {
+    max-width: 90%;
+    display: block; 
+    background: #efefef;
+    padding: 10px; 
+}
+
+.filter{
+    display: block;
+    max-width: 200px;
+    min-width: 100px;
+    max-height: 30px;
+    min-height: 20px;
+}

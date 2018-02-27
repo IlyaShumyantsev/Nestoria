@@ -1,0 +1,10 @@
+.page-wrap {
+    display: block;
+    max-width: 980px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.preloader{
+    display: block;
+}
