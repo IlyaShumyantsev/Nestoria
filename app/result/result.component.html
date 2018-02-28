@@ -1,0 +1,18 @@
+<div>
+    <div class="title">{{title}}</div>
+    <div *ngIf="data.response.status_code == 200;">
+        <div class="results">
+            <div *ngFor="let res of data.response.listings; let i = index">
+                <div class="info-block">
+                    <div class="picture" [ngStyle]="{'background': 'url(' + data.response.listings[i].thumb_url +')'}"></div>
+                    <span class="price">{{data.response.listings[i].price_formatted}}</span>
+                    <span class="title">{{data.response.listings[i].title}}</span>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div *ngIf="data.response.status_code != 200;">
+        <div class="results">The was a problem with your search</div> 
+    </div>
+</div>
+<hr>

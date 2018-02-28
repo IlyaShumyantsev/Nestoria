@@ -1,0 +1,94 @@
+<div class="search">
+    <hr>
+    <span class="property-cross">Property Cross</span>
+    <button class="faves-button">Faves(0)</button>
+    <div>
+        <hr>
+    </div>
+</div>
+<div>
+    <input type="checkbox" id="hd-1" class="hide"/>
+    <label for="hd-1">Click here for more information</label>
+    <div class="description">
+        Use the form below to search for houses to buy.
+        You can search by place-name, postcode, or click
+        'My location', to search in your current location
+    </div>
+    <hr>
+</div>
+<div class="field">
+    <input class="search-input" type="text" placeholder="newcastle" [(ngModel)]="city">
+    <button class="go-button" (click)="search()">Go</button>
+    <button class="location-button">My location</button>
+    <label class="filter-lable" for="hd-2"><span class="filter-span">Filters</span></label>
+    <input type="checkbox" id="hd-2" class="filter-button" />
+    <br>
+    <div class="filter-block">
+        <hr>
+        <div class="search-category">
+            <label class="text-comment">Country:</label>
+            <select [(ngModel)]="country">
+                <option value="co.uk">UK</option>
+                <option value="es">España</option>
+                <option value="de">Deutschland</option>
+                <option value="fr">France</option>
+                <option value="ch">Chile</option>
+                <option value="mx">México</option>
+                <option value="com.br">Brasil</option>
+                <option value="in">India</option>
+                <option value="pe">Perú</option>
+                <option value="au">Australia</option>
+                <option value="ph">Philippines</option>
+                <option value="pl">Polska</option>
+                <option value="at">Österreich</option>
+                <option value="ae">United Arab Emirates</option>
+                <option value="it">Italia</option>
+                <option value="ch">Schweiz</option>
+                <option value="com.tr">Türkiye</option>
+                <option value="pt">Portugal</option>
+            </select>
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Propetry type: </label>
+            <select  [(ngModel)]="property_type">
+                <option value="house">house</option>
+                <option value="flat">flat</option>
+                <option value="all">all</option>
+            </select>
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Price low: </label>
+            <input type="number" placeholder="0"  [(ngModel)]="price_low">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Price high: </label>
+            <input type="number" placeholder="0" [(ngModel)]="price_high">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Bedroom min: </label>
+            <input type="number" placeholder="0" [(ngModel)]="bedroom_number_min">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Bedroom max: </label>
+            <input type="number" placeholder="0" [(ngModel)]="bedroom_number_max">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Room min: </label>
+            <input type="number" placeholder="0" [(ngModel)]="room_number_min">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Room max: </label>
+            <input type="number" placeholder="0" [(ngModel)]="room_number_max">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Bathroom min: </label>
+            <input type="number" placeholder="0" [(ngModel)]="bathroom_number_min">
+        </div>
+        <div class="search-category">
+            <label class="text-comment">Bathroom max: </label>
+            <input type="number" placeholder="0" [(ngModel)]="bathroom_number_max">
+        </div>
+    </div>
+    <hr>
+</div>
+<app-result [data]="data"></app-result>

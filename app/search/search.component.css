@@ -35,7 +35,7 @@ button.faves-button{
     display: block;
     float: right;
     border: 0.1rem solid #efefef;
-    background-color: #ccc90d;
+    background-color: #0dcc17;
     margin: 0 auto;
     margin-top: 0.1rem;
     text-align: left;
@@ -50,7 +50,7 @@ button.faves-button{
 
 button.faves-button:hover{
     cursor: pointer;
-    background-color: #e0dd16;
+    background-color: #42f85b;
 }
 
 div.description{
@@ -96,6 +96,20 @@ button.go-button, button.location-button{
     color: #fff;
 }
 
+button.go-button:hover, button.go-button:focus{
+    cursor: pointer;
+    background-color: #ee4c8a;
+}
+
+button.location-button{
+    background-color: #e79e00;
+}
+
+button.location-button:hover, button.location-button:focus{
+    cursor: pointer;
+    background-color: #f5bf49;
+}
+
 button.filter-button{
     display: block;
     border: 0.1rem solid #efefef;
@@ -118,23 +132,19 @@ input.filter-button, div.filter-block{
 }
 
 input.filter-button:checked ~ div.filter-block{
+    height: auto;
     display: block;
 }
 
 label.filter-lable{
-    max-width: 200px;
+    max-width: 60px;
     min-width: 60px;
-    max-height: 60px;
-    min-height: 35px;
     display: block;
     margin: 0 auto;
     margin-top: 0.1rem;
     text-align: left;
     float: right;
-    display: block;
-    border: 0.1rem solid #efefef;
     background-color: #2499dd;
-    text-align: left;
 }
 
 span.filter-span{
@@ -147,7 +157,13 @@ span.filter-span{
     font-size: 1rem;
     color: #fff;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
+    border: 0.1rem solid #efefef;;
+    box-sizing:border-box;
+}
+
+span.filter-span:focus, span.filter-span:hover{
+    background: #48b1ee;
 }
 
 .hide {
@@ -180,8 +196,27 @@ span.filter-span{
 
 .filter{
     display: block;
+    float: left;
     max-width: 200px;
     min-width: 100px;
     max-height: 30px;
     min-height: 20px;
+    height: 20px;
+}
+
+.search-category{
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.search-category input, select{
+    width: 150px;
+    float: right;
+    margin-right: 40px;
+    margin-top: 5px;
+    background: #f3f3f3;
+}
+
+.search-category select{
+    width: 156px;
 }

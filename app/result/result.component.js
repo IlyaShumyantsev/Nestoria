@@ -10,27 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var list_service_1 = require("../shared/list.service");
 var ResultComponent = /** @class */ (function () {
-    function ResultComponent(listService) {
-        this.listService = listService;
-        this.apiUrl = "http://api.nestoria.co.uk/api?country=uk&pretty=1&action=search_listings&encoding=json&listing_type=buy&page=1&place_name=newcr&callback=JSONP_CALLBACK";
+    function ResultComponent() {
+        this.title = "Recent searches: ";
+        this.step = -1;
     }
-    ResultComponent.prototype.ngOnInit = function () {
-        this.listService.getList(this.apiUrl).subscribe(function (data) {
-            console.log(data);
-        });
+    ResultComponent.prototype.nextStep = function () {
+        return this.step++;
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], ResultComponent.prototype, "data", void 0);
     ResultComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'app-result',
-            templateUrl: 'result-component.html',
-            styleUrls: ['result-component.css'],
+            templateUrl: 'result.component.html',
+            styleUrls: ['result.component.css'],
         }),
-        __metadata("design:paramtypes", [list_service_1.ListService])
+        __metadata("design:paramtypes", [])
     ], ResultComponent);
     return ResultComponent;
 }());
 exports.ResultComponent = ResultComponent;
-//# sourceMappingURL=result-component.js.map
+//# sourceMappingURL=result.component.js.map

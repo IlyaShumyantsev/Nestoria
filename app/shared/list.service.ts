@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { JsonpModule, Jsonp, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { ResultComponent } from '../result/result-component';
-
 @Injectable()
 export class ListService{
     private apiUrl:string;
