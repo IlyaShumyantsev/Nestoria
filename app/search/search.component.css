@@ -127,11 +127,11 @@ button.filter-button{
     color: #fff;
 }
 
-input.filter-button, div.filter-block{
+input.filter-button, form.filter-block{
     display: none;
 }
 
-input.filter-button:checked ~ div.filter-block{
+input.filter-button:checked ~ form.filter-block{
     height: auto;
     display: block;
 }
@@ -219,4 +219,63 @@ span.filter-span:focus, span.filter-span:hover{
 
 .search-category select{
     width: 156px;
+}
+
+div.pagination{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    max-width: 300px;
+    min-width: 300px;
+    text-align: center;
+ 
+}
+
+button.pull-left{
+    float: left;
+    display: block;
+    margin-top: 10px;
+    border: 0.1rem solid #efefef;
+    background-color: #0a7ec2;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 40px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: #fff;
+}
+
+button.pull-left:hover{
+    cursor: pointer;
+    background-color: #49ace6;
+}
+
+button.pull-right{
+    float: right;
+    display: block;
+    margin-top: 10px;
+    border: 0.1rem solid #efefef;
+    background-color: #0a7ec2;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 40px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: #fff;
+}
+
+button.pull-right:hover{
+    cursor: pointer;
+    background-color: #49ace6;
+}
+
+.text{
+    font-family: PTSerifBold;
+    font-size: 25px;
+    color: rgb(146, 146, 146);
+    text-align: center;
+    line-height: 50px;
 }

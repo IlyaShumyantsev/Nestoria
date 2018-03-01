@@ -18,16 +18,16 @@
 </div>
 <div class="field">
     <input class="search-input" type="text" placeholder="newcastle" [(ngModel)]="city">
-    <button class="go-button" (click)="search()">Go</button>
+    <button class="go-button" (click)="search(1)">Go</button>
     <button class="location-button">My location</button>
     <label class="filter-lable" for="hd-2"><span class="filter-span">Filters</span></label>
     <input type="checkbox" id="hd-2" class="filter-button" />
     <br>
-    <div class="filter-block">
+    <form [formGroup]="myForm" class="filter-block">
         <hr>
         <div class="search-category">
             <label class="text-comment">Country:</label>
-            <select [(ngModel)]="country">
+            <select formControlName="country">
                 <option value="co.uk">UK</option>
                 <option value="es">España</option>
                 <option value="de">Deutschland</option>
@@ -50,7 +50,7 @@
         </div>
         <div class="search-category">
             <label class="text-comment">Propetry type: </label>
-            <select  [(ngModel)]="property_type">
+            <select formControlName="property_type">
                 <option value="house">house</option>
                 <option value="flat">flat</option>
                 <option value="all">all</option>
@@ -58,37 +58,43 @@
         </div>
         <div class="search-category">
             <label class="text-comment">Price low: </label>
-            <input type="number" placeholder="0"  [(ngModel)]="price_low">
+            <input type="number" formControlName="price_low">
         </div>
         <div class="search-category">
             <label class="text-comment">Price high: </label>
-            <input type="number" placeholder="0" [(ngModel)]="price_high">
+            <input type="number" formControlName="price_high">
         </div>
         <div class="search-category">
             <label class="text-comment">Bedroom min: </label>
-            <input type="number" placeholder="0" [(ngModel)]="bedroom_number_min">
+            <input type="number" formControlName="bedroom_number_min">
         </div>
         <div class="search-category">
             <label class="text-comment">Bedroom max: </label>
-            <input type="number" placeholder="0" [(ngModel)]="bedroom_number_max">
+            <input type="number" formControlName="bedroom_number_max">
         </div>
         <div class="search-category">
             <label class="text-comment">Room min: </label>
-            <input type="number" placeholder="0" [(ngModel)]="room_number_min">
+            <input type="number" formControlName="room_number_min">
         </div>
         <div class="search-category">
             <label class="text-comment">Room max: </label>
-            <input type="number" placeholder="0" [(ngModel)]="room_number_max">
+            <input type="number" formControlName="room_number_max">
         </div>
         <div class="search-category">
             <label class="text-comment">Bathroom min: </label>
-            <input type="number" placeholder="0" [(ngModel)]="bathroom_number_min">
+            <input type="number" formControlName="bathroom_number_min">
         </div>
         <div class="search-category">
             <label class="text-comment">Bathroom max: </label>
-            <input type="number" placeholder="0" [(ngModel)]="bathroom_number_max">
+            <input type="number" formControlName="bathroom_number_max">
         </div>
-    </div>
+    </form>
     <hr>
 </div>
 <app-result [data]="data"></app-result>
+<div class="pagination" *ngIf="data.response.page >= 1">
+    <button type="submit" class="pull-left"  (click)="backPage()"><< Back</button>
+    <span class="text">{{data.response.page}} from {{data.response.total_pages}}</span>
+    <button type="submit" class="pull-right" (click)="nextPage()">Next >></button>
+</div>
+<hr>

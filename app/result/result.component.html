@@ -4,9 +4,12 @@
         <div class="results">
             <div *ngFor="let res of data.response.listings; let i = index">
                 <div class="info-block">
-                    <div class="picture" [ngStyle]="{'background': 'url(' + data.response.listings[i].thumb_url +')'}"></div>
+                    <div class="picture" [ngStyle]="{'background-image': 'url(' + data.response.listings[i].img_url +')'}"></div>
                     <span class="price">{{data.response.listings[i].price_formatted}}</span>
                     <span class="title">{{data.response.listings[i].title}}</span>
+                    <br>
+                    <span class="keywords">{{data.response.listings[i].keywords}}</span>
+                    <button class="info" (click)="info(data, i)">More information</button>
                 </div>
             </div> 
         </div>
@@ -15,4 +18,3 @@
         <div class="results">The was a problem with your search</div> 
     </div>
 </div>
-<hr>

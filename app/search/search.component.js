@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var list_service_1 = require("../shared/list.service");
+var forms_1 = require("@angular/forms");
 var SearchComponent = /** @class */ (function () {
-    function SearchComponent(listService) {
+    function SearchComponent(listService, fb) {
         this.listService = listService;
+        this.fb = fb;
         this.data = {
             request: {
                 country: {},
@@ -30,57 +32,84 @@ var SearchComponent = /** @class */ (function () {
             }
         };
         this.city = "Manchester";
-        this.country = "co.uk";
-        this.price_high = 0;
-        this.price_low = 0;
-        this.bedroom_number_min = 0;
-        this.bedroom_number_max = 0;
-        this.bathroom_number_min = 0;
-        this.bathroom_number_max = 0;
-        this.room_number_min = 0;
-        this.room_number_max = 0;
-        this.property_type = "all";
+        this.language = "en";
         this.apiUrl = "";
         this.callback = "&callback=JSONP_CALLBACK";
+        this.page = 1;
+        this.createForm();
     }
-    SearchComponent.prototype.search = function () {
+    SearchComponent.prototype.createForm = function () {
+        this.myForm = this.fb.group({
+            country: new forms_1.FormControl("co.uk"),
+            property_type: new forms_1.FormControl("all"),
+            price_low: new forms_1.FormControl(0),
+            price_high: new forms_1.FormControl(0),
+            bedroom_number_min: new forms_1.FormControl(0),
+            bedroom_number_max: new forms_1.FormControl(0),
+            room_number_min: new forms_1.FormControl(0),
+            room_number_max: new forms_1.FormControl(0),
+            bathroom_number_min: new forms_1.FormControl(0),
+            bathroom_number_max: new forms_1.FormControl(0)
+        });
+    };
+    SearchComponent.prototype.search = function (page) {
         var _this = this;
-        this.setFilters();
+        this.page = page;
+        this.setFilters(page);
         this.listService.getList(this.apiUrl).subscribe(function (data) {
             _this.data = data;
         });
     };
-    SearchComponent.prototype.setFilters = function () {
-        this.apiUrl = "http://api.nestoria." + this.country + "/api?country=uk&pretty=1&action=search_listings" +
-            "&encoding=json&listing_type=buy&page=1&place_name=" + this.city;
-        if (this.price_high > 0) {
-            this.apiUrl += "&price_max=" + this.price_high;
+    SearchComponent.prototype.setFilters = function (page) {
+        this.apiUrl = "http://api.nestoria." + this.myForm.get("country").value + "/api?country=uk&language=" + this.language +
+            "&pretty=1&action=search_listings" +
+            "&encoding=json&listing_type=buy&page=" + page + "&place_name=" + this.city;
+        if (this.myForm.get("price_high").value > 0) {
+            this.apiUrl += "&price_max=" + this.myForm.get("price_high").value;
         }
-        if (this.price_low > 0) {
-            this.apiUrl += "&price_min=" + this.price_low;
+        if (this.myForm.get("price_low").value > 0) {
+            this.apiUrl += "&price_min=" + this.myForm.get("price_low").value;
         }
-        if (this.bedroom_number_max > 0) {
-            this.apiUrl += "&bedroom_max=" + this.bedroom_number_max;
+        if (this.myForm.get("bedroom_number_max").value > 0) {
+            this.apiUrl += "&bedroom_max=" + this.myForm.get("bedroom_number_max").value;
         }
-        if (this.bedroom_number_min > 0) {
-            this.apiUrl += "&bedroom_min=" + this.bedroom_number_min;
+        if (this.myForm.get("bedroom_number_min").value > 0) {
+            this.apiUrl += "&bedroom_min=" + this.myForm.get("bedroom_number_min").value;
         }
-        if (this.bathroom_number_max > 0) {
-            this.apiUrl += "&bathroom_max=" + this.bathroom_number_max;
+        if (this.myForm.get("bathroom_number_max").value > 0) {
+            this.apiUrl += "&bathroom_max=" + this.myForm.get("bathroom_number_max").value;
         }
-        if (this.bathroom_number_min > 0) {
-            this.apiUrl += "&bathroom_min=" + this.bathroom_number_min;
+        if (this.myForm.get("bathroom_number_min").value > 0) {
+            this.apiUrl += "&bathroom_min=" + this.myForm.get("bathroom_number_min").value;
         }
-        if (this.room_number_max > 0) {
-            this.apiUrl += "&room_max=" + this.room_number_max;
+        if (this.myForm.get("room_number_max").value > 0) {
+            this.apiUrl += "&room_max=" + this.myForm.get("room_number_max").value;
         }
-        if (this.room_number_min > 0) {
-            this.apiUrl += "&room_min=" + this.room_number_min;
+        if (this.myForm.get("room_number_min").value > 0) {
+            this.apiUrl += "&room_min=" + this.myForm.get("room_number_min").value;
         }
-        if (this.property_type != "all") {
-            this.apiUrl += "&property_type=" + this.property_type;
+        if (this.myForm.get("property_type").value != "all") {
+            this.apiUrl += "&property_type=" + this.myForm.get("property_type").value;
         }
         this.apiUrl += this.callback;
+    };
+    SearchComponent.prototype.backPage = function () {
+        if (this.data.response.page >= 2) {
+            this.page = this.page - 1;
+            this.search(this.page);
+        }
+        else {
+            this.page = this.data.response.page;
+        }
+    };
+    SearchComponent.prototype.nextPage = function () {
+        if (this.data.response.page <= this.data.response.total_pages) {
+            this.page = this.page + 1;
+            this.search(this.page);
+        }
+        else {
+            this.page = this.data.response.page;
+        }
     };
     SearchComponent = __decorate([
         core_1.Component({
@@ -89,7 +118,7 @@ var SearchComponent = /** @class */ (function () {
             templateUrl: 'search.component.html',
             styleUrls: ['search.component.css']
         }),
-        __metadata("design:paramtypes", [list_service_1.ListService])
+        __metadata("design:paramtypes", [list_service_1.ListService, forms_1.FormBuilder])
     ], SearchComponent);
     return SearchComponent;
 }());

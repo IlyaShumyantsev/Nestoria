@@ -15,8 +15,13 @@ var ResultComponent = /** @class */ (function () {
         this.title = "Recent searches: ";
         this.step = -1;
     }
-    ResultComponent.prototype.nextStep = function () {
-        return this.step++;
+    ResultComponent.prototype.info = function (data, i) {
+        alert('Title: ' + data.response.listings[i].title +
+            '\nProperty type: ' + data.response.listings[i].property_type +
+            '\nBathroom number: ' + data.response.listings[i].bathroom_number +
+            '\nBedroom number: ' + data.response.listings[i].bedroom_number +
+            '\nSummary: ' + data.response.listings[i].summary +
+            '\nKeywords: ' + data.response.listings[i].keywords);
     };
     __decorate([
         core_1.Input(),

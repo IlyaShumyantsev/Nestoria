@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { List } from '../shared/list';
 import { ListService } from '../shared/list.service';
-import { parse } from 'querystring';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
     moduleId: module.id,
@@ -25,57 +25,99 @@ export class SearchComponent{
             total_pages: { },
             total_results: { }
         }
-    }
+    };
 
     private city:string;
-    private country:string;
-    private price_high:number;
-    private price_low:number;
-    private bedroom_number_min:number;
-    private bedroom_number_max:number;
-    private bathroom_number_min:number;
-    private bathroom_number_max:number;
-    private room_number_min:number;
-    private room_number_max:number;
-    private property_type:string;
+    private language:string;
     private apiUrl:string;
     private callback:string;
+    private page:number;
 
-    constructor(private listService:ListService){ 
+    constructor(private listService:ListService, private fb:FormBuilder){ 
         this.city = "Manchester";
-        this.country = "co.uk";
-        this.price_high = 0;
-        this.price_low = 0;
-        this.bedroom_number_min = 0;
-        this.bedroom_number_max = 0;
-        this.bathroom_number_min = 0;
-        this.bathroom_number_max = 0;
-        this.room_number_min = 0;
-        this.room_number_max = 0;
-        this.property_type = "all";
+        this.language = "en";
         this.apiUrl = "";
         this.callback = "&callback=JSONP_CALLBACK";
+        this.page = 1;
+        this.createForm();
     }
 
-    public search(){
-        this.setFilters();
+    private myForm:FormGroup;
+    
+    private createForm(){
+        this.myForm = this.fb.group({
+            country:new FormControl("co.uk"),
+            property_type:new FormControl("all"),
+            price_low:new FormControl(0),
+            price_high:new FormControl(0),
+            bedroom_number_min:new FormControl(0),
+            bedroom_number_max:new FormControl(0),
+            room_number_min:new FormControl(0),
+            room_number_max:new FormControl(0),
+            bathroom_number_min:new FormControl(0),
+            bathroom_number_max:new FormControl(0)
+        });
+    }
+
+    public search(page){
+        this.page = page;
+        this.setFilters(page);
         this.listService.getList(this.apiUrl).subscribe(data => {
             this.data = data;
         });
     }
 
-    public setFilters(){
-        this.apiUrl = "http://api.nestoria." + this.country +"/api?country=uk&pretty=1&action=search_listings" + 
-                        "&encoding=json&listing_type=buy&page=1&place_name=" + this.city;
-        if(this.price_high > 0){ this.apiUrl += "&price_max=" + this.price_high; }
-        if(this.price_low > 0){ this.apiUrl += "&price_min=" + this.price_low; }
-        if(this.bedroom_number_max > 0){ this.apiUrl += "&bedroom_max=" + this.bedroom_number_max; }
-        if(this.bedroom_number_min > 0){ this.apiUrl += "&bedroom_min=" + this.bedroom_number_min; }
-        if(this.bathroom_number_max > 0){ this.apiUrl += "&bathroom_max=" + this.bathroom_number_max; }
-        if(this.bathroom_number_min > 0){ this.apiUrl += "&bathroom_min=" + this.bathroom_number_min; }
-        if(this.room_number_max > 0){ this.apiUrl += "&room_max=" + this.room_number_max; }
-        if(this.room_number_min > 0){ this.apiUrl += "&room_min=" + this.room_number_min; }
-        if(this.property_type != "all"){ this.apiUrl += "&property_type=" + this.property_type; }
+    public setFilters(page){
+        this.apiUrl = "http://api.nestoria." + this.myForm.get("country").value +"/api?country=uk&language=" + this.language +
+                        "&pretty=1&action=search_listings" + 
+                        "&encoding=json&listing_type=buy&page=" + page + "&place_name=" + this.city;
+        if(this.myForm.get("price_high").value > 0){
+            this.apiUrl += "&price_max=" + this.myForm.get("price_high").value;
+        }
+        if(this.myForm.get("price_low").value > 0){
+            this.apiUrl += "&price_min=" + this.myForm.get("price_low").value;
+        }
+        if(this.myForm.get("bedroom_number_max").value > 0){
+            this.apiUrl += "&bedroom_max=" + this.myForm.get("bedroom_number_max").value ;
+        }
+        if(this.myForm.get("bedroom_number_min").value  > 0){
+            this.apiUrl += "&bedroom_min=" + this.myForm.get("bedroom_number_min").value ;
+        }
+        if(this.myForm.get("bathroom_number_max").value > 0){
+            this.apiUrl += "&bathroom_max=" + this.myForm.get("bathroom_number_max").value;
+        }
+        if(this.myForm.get("bathroom_number_min").value> 0){
+            this.apiUrl += "&bathroom_min=" + this.myForm.get("bathroom_number_min").value;
+        }
+        if(this.myForm.get("room_number_max").value > 0){
+            this.apiUrl += "&room_max=" + this.myForm.get("room_number_max").value;
+        }
+        if(this.myForm.get("room_number_min").value > 0){
+            this.apiUrl += "&room_min=" + this.myForm.get("room_number_min").value;
+        }
+        if(this.myForm.get("property_type").value != "all"){
+            this.apiUrl += "&property_type=" + this.myForm.get("property_type").value;
+        }
         this.apiUrl += this.callback;
+    }
+
+    private backPage(){
+        if(this.data.response.page >= 2){
+            this.page = this.page - 1;
+            this.search(this.page);
+        }
+        else{
+            this.page = this.data.response.page;
+        }
+    }
+
+    private nextPage(){
+        if(this.data.response.page <= this.data.response.total_pages){
+            this.page = this.page + 1;
+            this.search(this.page);
+        }
+        else{
+            this.page = this.data.response.page;
+        }
     }
  }
