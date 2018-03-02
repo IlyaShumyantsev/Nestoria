@@ -10,10 +10,18 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
 var search_component_1 = require("./search/search.component");
 var result_component_1 = require("./result/result.component");
+var faves_component_1 = require("./faves/faves.component");
+var details_component_1 = require("./details/details.component");
 var list_service_1 = require("./shared/list.service");
+var appRoutes = [
+    { path: 'faves', component: faves_component_1.FavesComponent },
+    { path: 'details/:id', component: details_component_1.DetailsComponent },
+    { path: '', component: search_component_1.SearchComponent }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -23,12 +31,15 @@ var AppModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule,
                 http_1.JsonpModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule
+                forms_1.ReactiveFormsModule,
+                router_1.RouterModule.forRoot(appRoutes)
             ],
             declarations: [
                 app_component_1.AppComponent,
                 search_component_1.SearchComponent,
-                result_component_1.ResultComponent
+                result_component_1.ResultComponent,
+                faves_component_1.FavesComponent,
+                details_component_1.DetailsComponent
             ],
             providers: [list_service_1.ListService],
             bootstrap: [app_component_1.AppComponent]

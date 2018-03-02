@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { ListService } from '../shared/list.service';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validator, Validators } from '@angular/forms';
+
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({

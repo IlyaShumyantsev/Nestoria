@@ -1,0 +1,1 @@
+{"version":3,"file":"faves.component.js","sourceRoot":"","sources":["faves.component.ts"],"names":[],"mappings":";;;;;;;;AAAA,sCAA0C;AAS1C;IAAA;IAA8B,CAAC;IAAlB,cAAc;QAP1B,gBAAS,CAAC;YACP,QAAQ,EAAE,MAAM,CAAC,EAAE;YACnB,QAAQ,EAAE,WAAW;YACrB,WAAW,EAAE,sBAAsB;YACnC,SAAS,EAAE,CAAC,qBAAqB,CAAC;SACrC,CAAC;OAEW,cAAc,CAAI;IAAD,qBAAC;CAAA,AAA/B,IAA+B;AAAlB,wCAAc"}
