@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -6,12 +6,17 @@ import { Component, Input } from '@angular/core';
     templateUrl: 'result.component.html',
     styleUrls: ['result.component.css'],
 })
-export class ResultComponent{
+export class ResultComponent implements OnInit{
     private title:string = "Recent searches: ";
     private step:number;
     @Input() data;
+    
     constructor(){
         this.step = -1;
+    }
+
+    ngOnInit(){
+        this.data = JSON.parse(localStorage.getItem("searchRes"));
     }
 
     private info(data, i){

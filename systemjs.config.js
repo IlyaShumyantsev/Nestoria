@@ -16,7 +16,8 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             'rxjs': 'npm:rxjs',
             'tslib': 'npm:tslib/tslib.js',
-            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api'
+            'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+            '@agm/core': 'node_modules/@agm/core/core.umd.js'
             },
         packages: {
             app: {

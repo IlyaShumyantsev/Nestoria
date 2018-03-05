@@ -38,6 +38,10 @@ var SearchComponent = /** @class */ (function () {
         this.page = 1;
         this.createForm();
     }
+    SearchComponent.prototype.ngOnInit = function () {
+        this.data = JSON.parse(localStorage.getItem("searchRes"));
+        this.page = this.data.response.page;
+    };
     SearchComponent.prototype.createForm = function () {
         this.myForm = this.fb.group({
             country: new forms_1.FormControl("co.uk"),
@@ -57,7 +61,9 @@ var SearchComponent = /** @class */ (function () {
         this.page = page;
         this.setFilters(page);
         this.listService.getList(this.apiUrl).subscribe(function (data) {
-            _this.data = data;
+            //this.data = data;
+            localStorage.setItem('searchRes', JSON.stringify(data));
+            _this.data = JSON.parse(localStorage.getItem("searchRes"));
         });
     };
     SearchComponent.prototype.setFilters = function (page) {

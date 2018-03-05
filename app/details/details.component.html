@@ -1,11 +1,35 @@
 <hr>
 <div class="info">
     <span class="property-cross">Property Cross</span>
-    <button class="back" routerLink="/"><< Back</button>
+    <button class="back" routerLink="/"><< To Main</button>
 </div>
 <hr>
 <div class="detail-info">
-    <div class="picture" [ngStyle]="{'background-image': 'url(' + info.image +')'}"></div>
+    <div class="picture" [ngStyle]="{'background-image': 'url(' + info.image +')'}">
+        <span class="price">{{info.price}}</span>
+        <div *ngIf="ngOnInit() == true">
+            <button [ngClass]="{toFavesPressed:true}" (click)="addFaves()"></button>
+        </div>
+        <div *ngIf="ngOnInit() == false">
+            <button [ngClass]="{toFaves:true}" (click)="addFaves()"></button>
+        </div>
+    </div>
+    <hr>
+    <span class="title">{{info.title}}</span>
+    <hr>
+    <span class="property">Property type: {{info.property_type}}</span>
+    <span class="bathroom">Bathroom number: {{info.bathroom_number}}</span>
+    <span class="bedroom">Bedroom number: {{info.bedroom_number}}</span>
+    <hr>
+    <span class="summary">
+        {{info.summary}}
+        <br>
+        Also, you can view more information click to the <a href={{info.lister_url}} target="_blank">link</a>.
+    </span>
+    <hr>
+    <agm-map [latitude]="latitude" [longitude]="longitude">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+    <hr>
+    <span class="keywords">{{info.keywords}}</span>
 </div>
-<hr>
-<span class="title">{{info.title}}</span>

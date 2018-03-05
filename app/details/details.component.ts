@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Title } from '@angular/platform-browser';
+import { isNumeric } from 'rxjs/util/isNumeric';
+
+declare const google: any;
 
 @Component({
     moduleId: module.id,
@@ -10,7 +12,7 @@ import { Title } from '@angular/platform-browser';
     styleUrls: ['details.component.css']
 })
 
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
     private querySubscription: Subscription;
     private info:any = {
         title: { },
@@ -20,8 +22,14 @@ export class DetailsComponent {
         property_type: { },
         bathroom_number: { },
         bedroom_number: { },
-        keywords: { }
+        keywords: { },
+        latitude: { },
+        longitude: { },
+        lister_url: { }
     };
+
+    private latitude:number;
+    private longitude:number;
 
     constructor(private route: ActivatedRoute){
         this.querySubscription = route.queryParams.subscribe(
@@ -34,16 +42,65 @@ export class DetailsComponent {
                 this.info.bathroom_number = queryParam['bathroom_number'];
                 this.info.bedroom_number = queryParam['bedroom_number'];
                 this.info.keywords = queryParam['keywords'];
-
-                console.log(this.info.title);
-                console.log(this.info.summary);
-                console.log(this.info.image);
-                console.log(this.info.price);
-                console.log(this.info.property_type);
-                console.log(this.info.bathroom_number);
-                console.log(this.info.bedroom_number);
-                console.log(this.info.keywords);
+                this.info.latitude = queryParam['latitude'];
+                this.info.longitude = queryParam['longitude'];
+                this.latitude = parseFloat(this.info.latitude);
+                this.longitude = parseFloat(this.info.longitude);
+                this.info.lister_url = queryParam['lister_url'];
             }
         );
+    }
+
+    ngOnInit():boolean{
+        let data = [];
+        if(JSON.parse(localStorage.getItem("faves")) != null){
+            data = JSON.parse(localStorage.getItem("faves"));
+            if(this.searchInLocalStorage(data) == false){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    private addFaves(){
+        let data = [];
+        if(JSON.parse(localStorage.getItem("faves")) != null){
+            data = JSON.parse(localStorage.getItem("faves"));
+            if(this.searchInLocalStorage(data) == true){
+                data.push(this.info);
+                localStorage.setItem("faves", JSON.stringify(data));
+            }
+            else{
+                for(let i=0; i<data.length; i++){
+                    if(JSON.stringify(data[i]) == JSON.stringify(this.info)){
+                        data.splice(i, 1);
+                        localStorage.setItem("faves", JSON.stringify(data));
+                    }
+                }
+            }
+        }
+        else{
+            data.push(this.info);
+            localStorage.setItem("faves", JSON.stringify(data));
+        }
+    }
+
+    private searchInLocalStorage(data):boolean{
+        let info = { info: this.info };
+        if(data.some(this.searchInData, info) == false){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private searchInData(data){
+        return JSON.stringify(data) == JSON.stringify(this.info);
     }
 }

@@ -1,7 +1,7 @@
 <div class="search">
     <hr>
     <span class="property-cross">Property Cross</span>
-    <button class="faves-button" routerLink="/faves">Faves(0)</button>
+    <button class="faves-button" routerLink="/faves">Faves</button>
     <div>
         <hr>
     </div>
@@ -91,10 +91,16 @@
     </form>
     <hr>
 </div>
-<app-result [data]="data"></app-result>
-<div class="pagination" *ngIf="data.response.page >= 1">
-    <button type="submit" class="pull-left"  (click)="backPage()"><< Back</button>
-    <span class="text">{{data.response.page}} from {{data.response.total_pages}}</span>
-    <button type="submit" class="pull-right" (click)="nextPage()">Next >></button>
+<div *ngIf="data != null">
+    <app-result [data]="data"></app-result>
+    <div class="pagination" *ngIf="data.response.page >= 1">
+        <button *ngIf="page >= 2" type="submit" class="pull-left"  (click)="backPage()"><< Back</button>
+        <button *ngIf="page < 2" type="submit" class="pull-left-deactive" 
+            disabled="disabled" (click)="backPage()"><< Back</button>
+        <span class="text">{{data.response.page}} from {{data.response.total_pages}}</span>
+        <button *ngIf="page < data.response.total_pages" type="submit" class="pull-right" (click)="nextPage()">Next >></button>
+        <button *ngIf="page == data.response.total_pages" type="submit" class="pull-right-deactive" 
+            disabled="disabled" (click)="nextPage()">Next >></button>
+    </div>
+    <hr>
 </div>
-<hr>

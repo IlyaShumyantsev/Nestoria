@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ListService } from '../shared/list.service';
 import { FormGroup, FormControl, FormBuilder, Validator, Validators } from '@angular/forms';
-
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +9,7 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
     templateUrl: 'search.component.html',
     styleUrls: ['search.component.css']
 })
-export class SearchComponent{
+export class SearchComponent implements OnInit{
     private data:any = {
         request: {
             country: { },
@@ -43,6 +41,11 @@ export class SearchComponent{
         this.createForm();
     }
 
+    ngOnInit(){
+        this.data = JSON.parse(localStorage.getItem("searchRes"));
+        this.page = this.data.response.page;
+    }
+
     private myForm:FormGroup;
     
     private createForm(){
@@ -64,7 +67,9 @@ export class SearchComponent{
         this.page = page;
         this.setFilters(page);
         this.listService.getList(this.apiUrl).subscribe(data => {
-            this.data = data;
+            //this.data = data;
+            localStorage.setItem('searchRes', JSON.stringify(data));
+            this.data = JSON.parse(localStorage.getItem("searchRes"));
         });
     }
 

@@ -23,7 +23,10 @@ var DetailsComponent = /** @class */ (function () {
             property_type: {},
             bathroom_number: {},
             bedroom_number: {},
-            keywords: {}
+            keywords: {},
+            latitude: {},
+            longitude: {},
+            lister_url: {}
         };
         this.querySubscription = route.queryParams.subscribe(function (queryParam) {
             _this.info.title = queryParam['title'];
@@ -34,16 +37,62 @@ var DetailsComponent = /** @class */ (function () {
             _this.info.bathroom_number = queryParam['bathroom_number'];
             _this.info.bedroom_number = queryParam['bedroom_number'];
             _this.info.keywords = queryParam['keywords'];
-            console.log(_this.info.title);
-            console.log(_this.info.summary);
-            console.log(_this.info.image);
-            console.log(_this.info.price);
-            console.log(_this.info.property_type);
-            console.log(_this.info.bathroom_number);
-            console.log(_this.info.bedroom_number);
-            console.log(_this.info.keywords);
+            _this.info.latitude = queryParam['latitude'];
+            _this.info.longitude = queryParam['longitude'];
+            _this.latitude = parseFloat(_this.info.latitude);
+            _this.longitude = parseFloat(_this.info.longitude);
+            _this.info.lister_url = queryParam['lister_url'];
         });
     }
+    DetailsComponent.prototype.ngOnInit = function () {
+        var data = [];
+        if (JSON.parse(localStorage.getItem("faves")) != null) {
+            data = JSON.parse(localStorage.getItem("faves"));
+            if (this.searchInLocalStorage(data) == false) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    };
+    DetailsComponent.prototype.addFaves = function () {
+        var data = [];
+        if (JSON.parse(localStorage.getItem("faves")) != null) {
+            data = JSON.parse(localStorage.getItem("faves"));
+            if (this.searchInLocalStorage(data) == true) {
+                data.push(this.info);
+                localStorage.setItem("faves", JSON.stringify(data));
+            }
+            else {
+                for (var i = 0; i < data.length; i++) {
+                    if (JSON.stringify(data[i]) == JSON.stringify(this.info)) {
+                        data.splice(i, 1);
+                        localStorage.setItem("faves", JSON.stringify(data));
+                    }
+                }
+            }
+        }
+        else {
+            data.push(this.info);
+            localStorage.setItem("faves", JSON.stringify(data));
+        }
+    };
+    DetailsComponent.prototype.searchInLocalStorage = function (data) {
+        var info = { info: this.info };
+        if (data.some(this.searchInData, info) == false) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    DetailsComponent.prototype.searchInData = function (data) {
+        return JSON.stringify(data) == JSON.stringify(this.info);
+    };
     DetailsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

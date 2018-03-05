@@ -11,6 +11,8 @@ var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+var core_2 = require("@agm/core");
+//import { GooglePlaceModule } from "angular2-google-place"
 var app_component_1 = require("./app.component");
 var search_component_1 = require("./search/search.component");
 var result_component_1 = require("./result/result.component");
@@ -32,7 +34,11 @@ var AppModule = /** @class */ (function () {
                 http_1.JsonpModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
-                router_1.RouterModule.forRoot(appRoutes)
+                router_1.RouterModule.forRoot(appRoutes),
+                core_2.AgmCoreModule.forRoot({
+                    apiKey: 'AIzaSyCJ5t0y5LTCTbDMnFNuUNZlX-5SeTZBTL4'
+                })
+                //GooglePlaceModule
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -41,7 +47,9 @@ var AppModule = /** @class */ (function () {
                 faves_component_1.FavesComponent,
                 details_component_1.DetailsComponent
             ],
-            providers: [list_service_1.ListService],
+            providers: [
+                list_service_1.ListService
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

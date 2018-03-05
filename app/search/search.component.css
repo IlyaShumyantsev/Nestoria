@@ -252,12 +252,42 @@ button.pull-left:hover{
     background-color: #49ace6;
 }
 
+button.pull-left-deactive{
+    float: left;
+    display: block;
+    margin-top: 10px;
+    border: 0.1rem solid #efefef;
+    background-color: #8f8f8f;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 40px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: #fff;
+}
+
 button.pull-right{
     float: right;
     display: block;
     margin-top: 10px;
     border: 0.1rem solid #efefef;
     background-color: #0a7ec2;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 40px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: #fff;
+}
+
+buttin.pull-right-deactive{
+    float: right;
+    display: block;
+    margin-top: 10px;
+    border: 0.1rem solid #efefef;
+    background-color: #8f8f8f;
     max-width: 200px;
     min-width: 60px;
     max-height: 40px;

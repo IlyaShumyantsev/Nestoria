@@ -1,0 +1,152 @@
+@font-face{
+	font-family: MachineC;
+	src: url(./styles/fonts/MachineC.otf);
+}
+
+@font-face{
+	font-family: PTSerifBold;
+	src: url(./styles/fonts/PTSerifBold.ttf);
+}
+
+@font-face{
+	font-family: Arial;
+	src: url(./styles/fonts/Arial.ttf);
+}
+
+div.info{
+    display: block;
+    max-width: 100%;
+    height: 2.5rem;
+}
+
+span.faves{
+    display: block;
+    float: left;
+    font-family: PTSerifBold;
+    font-size: 2rem;
+    color: rgb(100, 100, 100);
+}
+
+span.empty{
+    display: block;
+    text-align: center;
+    font-family: PTSerifBold;
+    font-size: 2rem;
+    color: rgb(100, 100, 100);
+}
+
+button.back{
+    display: block;
+    float: right;
+    border: 0.1rem solid #efefef;
+    background-color: #0dcc17;
+    margin: 0 auto;
+    margin-top: 0.1rem;
+    text-align: left;
+    max-width: 200px;
+    min-width: 60px;
+    max-height: 60px;
+    min-height: 35px;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: #fff;
+}
+
+button.back:hover{
+    cursor: pointer;
+    background-color: #42f85b;
+}
+
+div.results{
+    display: block;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    box-sizing:border-box;
+    overflow: auto;
+}
+
+div.info-block{
+    display: block;
+    position: relative;
+    background: rgb(160, 196, 171);
+    max-width: 600px;
+    min-width: 300px;
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    max-height: 150px;
+    min-height: 100px;
+    border: 1px solid rgb(136, 136, 136);
+    box-sizing: border-box;
+}
+
+div.picture{
+    display: block;
+    border-right: solid 2px #ffffff;
+    position: relative;
+    width: 150px;
+    height: 98px; 
+    float: left;
+    background-size: cover;
+    border-right: 1px solid rgb(136, 136, 136);
+}
+
+div.picture:hover{
+    cursor: pointer;
+}
+
+span.price{
+    display: block;
+    float: right;
+    text-align: left;
+    bottom: 0;
+    right: 0;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: #fff;
+    background: rgb(170, 196, 0);
+}
+
+span.title{
+    width: 40%;
+    display: block;
+    top: 0;
+    float: left;
+    font-family: PTSerifBold;
+    font-size: 0.7rem;
+    color: rgb(92, 244, 255);
+    word-break: break-all;
+}
+
+span.keywords{
+    display: block;
+    width: 50%;
+    float: left;
+    font-family: Arial;
+    font-size: 0.7rem;
+    color: rgb(236, 236, 236);
+    word-break: break-all;
+}
+
+button.info{
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 151px;
+    border: 0.1rem solid #efefef;
+    background-color: #0dcc17;
+    text-align: left;
+    max-width: 130px;
+    min-width: 60px;
+    max-height: 30px;
+    min-height: 30px;
+    font-family: PTSerifBold;
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+button.info:hover{
+    background-color: #39eb41;
+    cursor: pointer;
+}

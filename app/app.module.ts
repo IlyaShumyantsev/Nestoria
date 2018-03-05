@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { JsonpModule, Jsonp, Response } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
+//import { GooglePlaceModule } from "angular2-google-place"
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
@@ -23,7 +25,11 @@ const appRoutes: Routes = [
     JsonpModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCJ5t0y5LTCTbDMnFNuUNZlX-5SeTZBTL4'
+    })
+    //GooglePlaceModule
   ],
   declarations: [
     AppComponent,
@@ -32,7 +38,9 @@ const appRoutes: Routes = [
     FavesComponent,
     DetailsComponent
   ],
-  providers: [ListService],
+  providers: [
+    ListService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { } 

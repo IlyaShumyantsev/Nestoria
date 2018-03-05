@@ -15,6 +15,9 @@ var ResultComponent = /** @class */ (function () {
         this.title = "Recent searches: ";
         this.step = -1;
     }
+    ResultComponent.prototype.ngOnInit = function () {
+        this.data = JSON.parse(localStorage.getItem("searchRes"));
+    };
     ResultComponent.prototype.info = function (data, i) {
         alert('Title: ' + data.response.listings[i].title +
             '\nProperty type: ' + data.response.listings[i].property_type +

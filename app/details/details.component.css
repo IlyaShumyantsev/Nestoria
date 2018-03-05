@@ -37,7 +37,6 @@ div.picture{
     min-height: 350px;
     max-height: 350px; 
     background-size: cover;
-    border-right: 1px solid rgb(136, 136, 136);
 }
 
 button.back{
@@ -63,9 +62,90 @@ button.back:hover{
 }
 
 span.title{
+    display: block;
+    width:100%;
     text-align: center;
     font-family: PTSerifBold;
+    font-size: 1.5rem;
+    color: rgb(37, 37, 37);
+}
+
+span.price{
+    display: block;
+    float: right;
+    text-align: left;
+    top: 0;
+    right: 0;
+    font-family: PTSerifBold;
+    font-size: 1.3rem;
+    color: #fff;
+    background: rgb(170, 196, 0);
+}
+
+span.property{
+    display: inline-block;
+    font-family: PTSerifBold;
     font-size: 1rem;
-    color: rgb(44, 199, 247);
-    background-color: #7c7c7c;
+    color: rgb(160, 0, 0);
+    margin-right: 40px;
+}
+
+span.bathroom{
+    display: inline-block;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: rgb(10, 7, 194);
+    margin-right: 40px;
+}
+
+span.bedroom{
+    display: inline-block;
+    font-family: PTSerifBold;
+    font-size: 1rem;
+    color: rgb(17, 114, 41);
+    margin-right: 40px;
+}
+
+span.summary{
+    display: block;
+    font-family: PTSerifBold;
+    font-size: 1.2rem;
+    color: rgb(77, 77, 77);
+}
+
+agm-map {
+    height: 300px;
+}
+
+span.keywords{
+    display: block;
+    font-family: Arial;
+    font-size: 1rem;
+    color: rgb(85, 85, 85);
+}
+
+button.toFaves{
+    background: transparent url(./img/faves_1.png) no-repeat center top;
+    border: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100px; 
+    height: 100px;
+    outline: 0 !important;
+}
+
+button.toFaves:hover{
+    cursor: pointer;
+    background: transparent url(./img/faves_2.png) no-repeat center top;
+}
+
+button.toFavesPressed{
+    background: transparent url(./img/faves_2.png) no-repeat center top;
+    border: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100px; 
+    height: 100px;
+    cursor: pointer;
+    outline: 0 !important;
 }
