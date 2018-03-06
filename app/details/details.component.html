@@ -5,8 +5,8 @@
 </div>
 <hr>
 <div class="detail-info">
-    <div class="picture" [ngStyle]="{'background-image': 'url(' + info.image +')'}">
-        <span class="price">{{info.price}}</span>
+    <div class="picture" [ngStyle]="{'background-image': 'url(' + info.img_url +')'}">
+        <span class="price">{{info.price_formatted}}</span>
         <div *ngIf="ngOnInit() == true">
             <button [ngClass]="{toFavesPressed:true}" (click)="addFaves()"></button>
         </div>

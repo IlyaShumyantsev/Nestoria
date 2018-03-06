@@ -13,21 +13,7 @@ import { last } from '@angular/router/src/utils/collection';
     styleUrls: ['search.component.css']
 })
 export class SearchComponent implements OnInit{
-    private data:any = {
-        request: {
-            country: { },
-            language: { },
-            location: { },
-            page: { }
-        },
-        response: {
-            listings: [],
-            page: { },
-            status_code: { },
-            total_pages: { },
-            total_results: { }
-        }
-    };
+    private data:any = { };
 
     private city:string;
     private country:string;
@@ -37,9 +23,12 @@ export class SearchComponent implements OnInit{
     private callback:string;
     private page:number;
 
+    @ViewChild('search') public searchElement:ElementRef;
+
     constructor(private listService:ListService, private fb:FormBuilder,
     private mapsAPILoader: MapsAPILoader, private ngZone: NgZone){ 
         this.city = "Manchester";
+        this.country = "co.uk";
         this.language = "en";
         this.apiUrl = "";
         this.callback = "&callback=JSONP_CALLBACK";
@@ -47,11 +36,12 @@ export class SearchComponent implements OnInit{
         this.createForm();
     }
 
-    @ViewChild('search') public searchElement: ElementRef;
-
     ngOnInit(){
         this.data = JSON.parse(localStorage.getItem("searchRes"));
         this.page = this.data.response.page;
+
+        this.country = this.data.request.country;
+        this.city = this.data.request.location;
 
         this.mapsAPILoader.load().then(
             () =>{
@@ -61,8 +51,10 @@ export class SearchComponent implements OnInit{
                 autocomplete.addListener("place_changed", () =>{
                     this.ngZone.run(()=>{
                         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                        this.city = place.name.toString();
-                        this.country = place.formatted_address.slice(place.formatted_address.lastIndexOf(" "), place.formatted_address.length);
+                        if(place.formatted_address != null || place.formatted_address != undefined){
+                            this.city = place.name.toString();
+                            this.country = place.formatted_address.slice(place.formatted_address.lastIndexOf(" ") + 1, place.formatted_address.length);
+                        }
                         if(place.geometry === undefined || place.geometry === null){
                             return;
                         }
@@ -136,7 +128,7 @@ export class SearchComponent implements OnInit{
     }
 
     private countryFilter(){
-        if(this.country === " UK"){
+        if(this.country === "UK" || this.country === "uk"){
             this.country = "co.uk";
         }
         else if(this.country === "Spain"){
@@ -149,12 +141,12 @@ export class SearchComponent implements OnInit{
             this.country = "fr";
         }
         else if(this.country === "Chile"){
-            this.country = "ch";
+            this.country = "cl";
         }
         else if(this.country === "Mexico"){
             this.country = "mx";
         }
-        else if(this.country === "Brazil"){
+        else if(this.country === "Brazil" || this.country === "br"){
             this.country = "com.br";
         }
         else if(this.country === "India"){
@@ -163,13 +155,13 @@ export class SearchComponent implements OnInit{
         else if(this.country === "Peru"){
             this.country = "pe";
         }
-        else if(this.country === "Australia"){
-            this.country = "au";
+        else if(this.country === "Australia" || this.country === "au"){
+            this.country = "com.au";
         }
-        else if(this.country === "Philippines"){
-            this.country = "ph";
+        else if(this.country === "Philippines" || this.country === "ph"){
+            this.country = "com.ph";
         }
-        else if(this.country === "Polska"){
+        else if(this.country === "Poland"){
             this.country = "pl";
         }
         else if(this.country === "Austria"){
@@ -184,31 +176,41 @@ export class SearchComponent implements OnInit{
         else if(this.country === "Switzerland"){
             this.country = "ch";
         }
-        else if(this.country === "Turkey"){
+        else if(this.country === "Turkey" || this.country === "tr"){
             this.country = "com.tr";
         }
         else if(this.country === "Portugal"){
             this.country = "pt";
         }
+        else if(this.country === "Argentina" || this.country === "ar"){
+            this.country = "com.ar";
+        }
+        else if(this.country === "Colombia" || this.country === "co"){
+            this.country = "com.co";
+        }
+        else if(this.country === "Indonesia" || this.country === "id"){
+            this.country = "co.id";
+        }
     }
 
-    private backPage(){
-        if(this.data.response.page >= 2){
-            this.page = this.page - 1;
-            this.searchFun(this.page);
+    private paginationControl(index){
+        if(index === 0){
+            if(this.data.response.page >= 2){
+                this.page = this.page - 1;
+                this.searchFun(this.page);
+            }
+            else{
+                this.page = this.data.response.page;
+            }
         }
-        else{
-            this.page = this.data.response.page;
-        }
-    }
-
-    private nextPage(){
-        if(this.data.response.page <= this.data.response.total_pages){
-            this.page = this.page + 1;
-            this.searchFun(this.page);
-        }
-        else{
-            this.page = this.data.response.page;
+        if(index === 1){
+            if(this.data.response.page <= this.data.response.total_pages){
+                this.page = this.page + 1;
+                this.searchFun(this.page);
+            }
+            else{
+                this.page = this.data.response.page;
+            }
         }
     }
  }

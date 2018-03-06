@@ -15,33 +15,11 @@ var DetailsComponent = /** @class */ (function () {
     function DetailsComponent(route) {
         var _this = this;
         this.route = route;
-        this.info = {
-            title: {},
-            summay: {},
-            image: {},
-            price: {},
-            property_type: {},
-            bathroom_number: {},
-            bedroom_number: {},
-            keywords: {},
-            latitude: {},
-            longitude: {},
-            lister_url: {}
-        };
+        this.info = {};
         this.querySubscription = route.queryParams.subscribe(function (queryParam) {
-            _this.info.title = queryParam['title'];
-            _this.info.summary = queryParam['summary'];
-            _this.info.image = queryParam['image'];
-            _this.info.price = queryParam['price'];
-            _this.info.property_type = queryParam['property_type'];
-            _this.info.bathroom_number = queryParam['bathroom_number'];
-            _this.info.bedroom_number = queryParam['bedroom_number'];
-            _this.info.keywords = queryParam['keywords'];
-            _this.info.latitude = queryParam['latitude'];
-            _this.info.longitude = queryParam['longitude'];
+            _this.info = JSON.parse(queryParam['data']);
             _this.latitude = parseFloat(_this.info.latitude);
             _this.longitude = parseFloat(_this.info.longitude);
-            _this.info.lister_url = queryParam['lister_url'];
         });
     }
     DetailsComponent.prototype.ngOnInit = function () {

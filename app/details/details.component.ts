@@ -14,19 +14,7 @@ declare const google: any;
 
 export class DetailsComponent implements OnInit {
     private querySubscription: Subscription;
-    private info:any = {
-        title: { },
-        summay: { },
-        image: { },
-        price: { },
-        property_type: { },
-        bathroom_number: { },
-        bedroom_number: { },
-        keywords: { },
-        latitude: { },
-        longitude: { },
-        lister_url: { }
-    };
+    private info:any = { };
 
     private latitude:number;
     private longitude:number;
@@ -34,19 +22,10 @@ export class DetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute){
         this.querySubscription = route.queryParams.subscribe(
             (queryParam: any) => {
-                this.info.title = queryParam['title'];
-                this.info.summary = queryParam['summary'];
-                this.info.image = queryParam['image'];
-                this.info.price = queryParam['price'];
-                this.info.property_type = queryParam['property_type'];
-                this.info.bathroom_number = queryParam['bathroom_number'];
-                this.info.bedroom_number = queryParam['bedroom_number'];
-                this.info.keywords = queryParam['keywords'];
-                this.info.latitude = queryParam['latitude'];
-                this.info.longitude = queryParam['longitude'];
+                this.info = JSON.parse(queryParam['data']);
+ 
                 this.latitude = parseFloat(this.info.latitude);
                 this.longitude = parseFloat(this.info.longitude);
-                this.info.lister_url = queryParam['lister_url'];
             }
         );
     }

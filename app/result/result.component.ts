@@ -27,4 +27,13 @@ export class ResultComponent implements OnInit{
             '\nSummary: ' + data.response.listings[i].summary +
             '\nKeywords: ' + data.response.listings[i].keywords);
     }
+
+    private objectToString(obj):string{
+        try{
+            return JSON.stringify(obj);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
  }

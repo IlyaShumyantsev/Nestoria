@@ -8,21 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class FavesComponent implements OnInit{ 
-    private data:any = {
-        request: {
-            country: { },
-            language: { },
-            location: { },
-            page: { }
-        },
-        response: {
-            listings: [],
-            page: { },
-            status_code: { },
-            total_pages: { },
-            total_results: { }
-        }
-    };
+    private data:any = { };
 
     ngOnInit(){
         this.data = JSON.parse(localStorage.getItem("faves"));
@@ -35,5 +21,13 @@ export class FavesComponent implements OnInit{
             '\nBedroom number: ' + data[i].bedroom_number + 
             '\nSummary: ' + data[i].summary +
             '\nKeywords: ' + data[i].keywords);
+    }
+    private objectToString(obj):string{
+        try{
+            return JSON.stringify(obj);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 }

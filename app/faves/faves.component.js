@@ -9,21 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var FavesComponent = /** @class */ (function () {
     function FavesComponent() {
-        this.data = {
-            request: {
-                country: {},
-                language: {},
-                location: {},
-                page: {}
-            },
-            response: {
-                listings: [],
-                page: {},
-                status_code: {},
-                total_pages: {},
-                total_results: {}
-            }
-        };
+        this.data = {};
     }
     FavesComponent.prototype.ngOnInit = function () {
         this.data = JSON.parse(localStorage.getItem("faves"));
@@ -35,6 +21,14 @@ var FavesComponent = /** @class */ (function () {
             '\nBedroom number: ' + data[i].bedroom_number +
             '\nSummary: ' + data[i].summary +
             '\nKeywords: ' + data[i].keywords);
+    };
+    FavesComponent.prototype.objectToString = function (obj) {
+        try {
+            return JSON.stringify(obj);
+        }
+        catch (err) {
+            console.log(err);
+        }
     };
     FavesComponent = __decorate([
         core_1.Component({

@@ -26,6 +26,14 @@ var ResultComponent = /** @class */ (function () {
             '\nSummary: ' + data.response.listings[i].summary +
             '\nKeywords: ' + data.response.listings[i].keywords);
     };
+    ResultComponent.prototype.objectToString = function (obj) {
+        try {
+            return JSON.stringify(obj);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    };
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)

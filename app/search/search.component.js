@@ -19,22 +19,9 @@ var SearchComponent = /** @class */ (function () {
         this.fb = fb;
         this.mapsAPILoader = mapsAPILoader;
         this.ngZone = ngZone;
-        this.data = {
-            request: {
-                country: {},
-                language: {},
-                location: {},
-                page: {}
-            },
-            response: {
-                listings: [],
-                page: {},
-                status_code: {},
-                total_pages: {},
-                total_results: {}
-            }
-        };
+        this.data = {};
         this.city = "Manchester";
+        this.country = "co.uk";
         this.language = "en";
         this.apiUrl = "";
         this.callback = "&callback=JSONP_CALLBACK";
@@ -45,13 +32,17 @@ var SearchComponent = /** @class */ (function () {
         var _this = this;
         this.data = JSON.parse(localStorage.getItem("searchRes"));
         this.page = this.data.response.page;
+        this.country = this.data.request.country;
+        this.city = this.data.request.location;
         this.mapsAPILoader.load().then(function () {
             var autocomplete = new google.maps.places.Autocomplete(_this.searchElement.nativeElement, {});
             autocomplete.addListener("place_changed", function () {
                 _this.ngZone.run(function () {
                     var place = autocomplete.getPlace();
-                    _this.city = place.name.toString();
-                    _this.country = place.formatted_address.slice(place.formatted_address.lastIndexOf(" "), place.formatted_address.length);
+                    if (place.formatted_address != null || place.formatted_address != undefined) {
+                        _this.city = place.name.toString();
+                        _this.country = place.formatted_address.slice(place.formatted_address.lastIndexOf(" ") + 1, place.formatted_address.length);
+                    }
                     if (place.geometry === undefined || place.geometry === null) {
                         return;
                     }
@@ -119,7 +110,7 @@ var SearchComponent = /** @class */ (function () {
         this.apiUrl += this.callback;
     };
     SearchComponent.prototype.countryFilter = function () {
-        if (this.country === " UK") {
+        if (this.country === "UK" || this.country === "uk") {
             this.country = "co.uk";
         }
         else if (this.country === "Spain") {
@@ -132,12 +123,12 @@ var SearchComponent = /** @class */ (function () {
             this.country = "fr";
         }
         else if (this.country === "Chile") {
-            this.country = "ch";
+            this.country = "cl";
         }
         else if (this.country === "Mexico") {
             this.country = "mx";
         }
-        else if (this.country === "Brazil") {
+        else if (this.country === "Brazil" || this.country === "br") {
             this.country = "com.br";
         }
         else if (this.country === "India") {
@@ -146,13 +137,13 @@ var SearchComponent = /** @class */ (function () {
         else if (this.country === "Peru") {
             this.country = "pe";
         }
-        else if (this.country === "Australia") {
-            this.country = "au";
+        else if (this.country === "Australia" || this.country === "au") {
+            this.country = "com.au";
         }
-        else if (this.country === "Philippines") {
-            this.country = "ph";
+        else if (this.country === "Philippines" || this.country === "ph") {
+            this.country = "com.ph";
         }
-        else if (this.country === "Polska") {
+        else if (this.country === "Poland") {
             this.country = "pl";
         }
         else if (this.country === "Austria") {
@@ -167,29 +158,40 @@ var SearchComponent = /** @class */ (function () {
         else if (this.country === "Switzerland") {
             this.country = "ch";
         }
-        else if (this.country === "Turkey") {
+        else if (this.country === "Turkey" || this.country === "tr") {
             this.country = "com.tr";
         }
         else if (this.country === "Portugal") {
             this.country = "pt";
         }
+        else if (this.country === "Argentina" || this.country === "ar") {
+            this.country = "com.ar";
+        }
+        else if (this.country === "Colombia" || this.country === "co") {
+            this.country = "com.co";
+        }
+        else if (this.country === "Indonesia" || this.country === "id") {
+            this.country = "co.id";
+        }
     };
-    SearchComponent.prototype.backPage = function () {
-        if (this.data.response.page >= 2) {
-            this.page = this.page - 1;
-            this.searchFun(this.page);
+    SearchComponent.prototype.paginationControl = function (index) {
+        if (index === 0) {
+            if (this.data.response.page >= 2) {
+                this.page = this.page - 1;
+                this.searchFun(this.page);
+            }
+            else {
+                this.page = this.data.response.page;
+            }
         }
-        else {
-            this.page = this.data.response.page;
-        }
-    };
-    SearchComponent.prototype.nextPage = function () {
-        if (this.data.response.page <= this.data.response.total_pages) {
-            this.page = this.page + 1;
-            this.searchFun(this.page);
-        }
-        else {
-            this.page = this.data.response.page;
+        if (index === 1) {
+            if (this.data.response.page <= this.data.response.total_pages) {
+                this.page = this.page + 1;
+                this.searchFun(this.page);
+            }
+            else {
+                this.page = this.data.response.page;
+            }
         }
     };
     __decorate([

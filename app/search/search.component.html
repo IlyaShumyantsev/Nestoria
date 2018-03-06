@@ -76,13 +76,13 @@
 <div *ngIf="data != null">
     <app-result [data]="data"></app-result>
     <div class="pagination" *ngIf="data.response.page >= 1">
-        <button *ngIf="page >= 2" type="submit" class="pull-left"  (click)="backPage()"><< Back</button>
+        <button *ngIf="page >= 2" type="submit" class="pull-left"  (click)="paginationControl(0)"><< Back</button>
         <button *ngIf="page < 2" type="submit" class="pull-left-deactive" 
-            disabled="disabled" (click)="backPage()"><< Back</button>
+            disabled="disabled" (click)="paginationControl(0)"><< Back</button>
         <span class="text">{{data.response.page}} from {{data.response.total_pages}}</span>
-        <button *ngIf="page < data.response.total_pages" type="submit" class="pull-right" (click)="nextPage()">Next >></button>
+        <button *ngIf="page < data.response.total_pages" type="submit" class="pull-right" (click)="paginationControl(1)">Next >></button>
         <button *ngIf="page == data.response.total_pages" type="submit" class="pull-right-deactive" 
-            disabled="disabled" (click)="nextPage()">Next >></button>
+            disabled="disabled" (click)="paginationControl(1)">Next >></button>
     </div>
     <hr>
 </div>

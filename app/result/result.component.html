@@ -5,17 +5,7 @@
             <div *ngFor="let res of data.response.listings; let i = index">
                 <div class="info-block">
                     <div class="picture" [queryParams]="{
-                        'title':data.response.listings[i].title,
-                        'summary':data.response.listings[i].summary,
-                        'image':data.response.listings[i].img_url,
-                        'price':data.response.listings[i].price_formatted,
-                        'property_type':data.response.listings[i].property_type,
-                        'bathroom_number':data.response.listings[i].bathroom_number,
-                        'bedroom_number':data.response.listings[i].bedroom_number,
-                        'keywords':data.response.listings[i].keywords,
-                        'latitude':data.response.listings[i].latitude,
-                        'longitude':data.response.listings[i].longitude,
-                        'lister_url':data.response.listings[i].lister_url
+                        'data':objectToString(data.response.listings[i])
                     }" [routerLink]="['details', i]" [ngStyle]="{'background-image': 'url(' + data.response.listings[i].img_url +')'}"></div>
                     <span class="price">{{data.response.listings[i].price_formatted}}</span>
                     <span class="title">{{data.response.listings[i].title}}</span>

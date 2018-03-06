@@ -10,20 +10,10 @@
             <div *ngIf="data[i] != null">
                 <div class="info-block">
                     <div class="picture" [routerLink]="['/details', i]" [queryParams]="{
-                        'title':data[i].title,
-                        'summary':data[i].summary,
-                        'image':data[i].image,
-                        'price':data[i].price,
-                        'property_type':data[i].property_type,
-                        'bathroom_number':data[i].bathroom_number,
-                        'bedroom_number':data[i].bedroom_number,
-                        'keywords':data[i].keywords,
-                        'latitude':data[i].latitude,
-                        'longitude':data[i].longitude,
-                        'lister_url':data[i].lister_url
+                        'data':objectToString(data[i])
                     }"
-                     [ngStyle]="{'background-image': 'url(' + data[i].image +')'}"></div>
-                    <span class="price">{{data[i].price}}</span>
+                    [ngStyle]="{'background-image': 'url(' + data[i].img_url +')'}"></div>
+                    <span class="price">{{data[i].price_formatted}}</span>
                     <span class="title">{{data[i].title}}</span>
                     <br>
                     <span class="keywords">{{data[i].keywords}}</span>
