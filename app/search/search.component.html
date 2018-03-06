@@ -17,8 +17,8 @@
     <hr>
 </div>
 <div class="field">
-    <input class="search-input" type="text" placeholder="newcastle" [(ngModel)]="city">
-    <button class="go-button" (click)="search(1)">Go</button>
+    <input class="search-input" type="text" placeholder="newcastle" #search/>
+    <button class="go-button" (click)="searchFun(1)">Go</button>
     <button class="location-button">My location</button>
     <label class="filter-lable" for="hd-2"><span class="filter-span">Filters</span></label>
     <input type="checkbox" id="hd-2" class="filter-button" />
@@ -28,24 +28,6 @@
         <div class="search-category">
             <label class="text-comment">Country:</label>
             <select formControlName="country">
-                <option value="co.uk">UK</option>
-                <option value="es">España</option>
-                <option value="de">Deutschland</option>
-                <option value="fr">France</option>
-                <option value="ch">Chile</option>
-                <option value="mx">México</option>
-                <option value="com.br">Brasil</option>
-                <option value="in">India</option>
-                <option value="pe">Perú</option>
-                <option value="au">Australia</option>
-                <option value="ph">Philippines</option>
-                <option value="pl">Polska</option>
-                <option value="at">Österreich</option>
-                <option value="ae">United Arab Emirates</option>
-                <option value="it">Italia</option>
-                <option value="ch">Schweiz</option>
-                <option value="com.tr">Türkiye</option>
-                <option value="pt">Portugal</option>
             </select>
         </div>
         <div class="search-category">

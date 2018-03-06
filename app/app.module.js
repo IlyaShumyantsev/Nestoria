@@ -12,7 +12,6 @@ var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var core_2 = require("@agm/core");
-//import { GooglePlaceModule } from "angular2-google-place"
 var app_component_1 = require("./app.component");
 var search_component_1 = require("./search/search.component");
 var result_component_1 = require("./result/result.component");
@@ -36,9 +35,10 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot(appRoutes),
                 core_2.AgmCoreModule.forRoot({
-                    apiKey: 'AIzaSyCJ5t0y5LTCTbDMnFNuUNZlX-5SeTZBTL4'
+                    apiKey: 'AIzaSyCJ5t0y5LTCTbDMnFNuUNZlX-5SeTZBTL4',
+                    libraries: ["places"],
+                    language: "en"
                 })
-                //GooglePlaceModule
             ],
             declarations: [
                 app_component_1.AppComponent,
