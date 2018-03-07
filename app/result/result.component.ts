@@ -8,12 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit{
     private title:string = "Recent searches: ";
-    private step:number;
-    @Input() data;
+    @Input() data:any;
     
-    constructor(){
-        this.step = -1;
-    }
+    constructor(){ }
 
     ngOnInit(){
         this.data = JSON.parse(localStorage.getItem("searchRes"));

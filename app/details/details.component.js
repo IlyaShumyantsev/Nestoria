@@ -22,20 +22,15 @@ var DetailsComponent = /** @class */ (function () {
             _this.longitude = parseFloat(_this.info.longitude);
         });
     }
-    DetailsComponent.prototype.ngOnInit = function () {
-        var data = [];
-        if (JSON.parse(localStorage.getItem("faves")) != null) {
-            data = JSON.parse(localStorage.getItem("faves"));
-            if (this.searchInLocalStorage(data) == false) {
+    DetailsComponent.prototype.favesStatus = function () {
+        var data = localStorage.getItem("faves");
+        if (JSON.parse(data) != null) {
+            if (this.searchInLocalStorage(JSON.parse(data)) == false) {
                 return true;
             }
-            else {
-                return false;
-            }
-        }
-        else {
             return false;
         }
+        return false;
     };
     DetailsComponent.prototype.addFaves = function () {
         var data = [];
@@ -64,9 +59,7 @@ var DetailsComponent = /** @class */ (function () {
         if (data.some(this.searchInData, info) == false) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     };
     DetailsComponent.prototype.searchInData = function (data) {
         return JSON.stringify(data) == JSON.stringify(this.info);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { isNumeric } from 'rxjs/util/isNumeric';
@@ -12,7 +12,7 @@ declare const google: any;
     styleUrls: ['details.component.css']
 })
 
-export class DetailsComponent implements OnInit {
+export class DetailsComponent{
     private querySubscription: Subscription;
     private info:any = { };
 
@@ -30,20 +30,15 @@ export class DetailsComponent implements OnInit {
         );
     }
 
-    ngOnInit():boolean{
-        let data = [];
-        if(JSON.parse(localStorage.getItem("faves")) != null){
-            data = JSON.parse(localStorage.getItem("faves"));
-            if(this.searchInLocalStorage(data) == false){
+    favesStatus():boolean{
+        let data = localStorage.getItem("faves");
+        if(JSON.parse(data) != null){
+            if(this.searchInLocalStorage(JSON.parse(data)) == false){
                 return true;
             }
-            else{
-                return false;
-            }
-        }
-        else{
             return false;
         }
+        return false;
     }
 
     private addFaves(){
@@ -74,9 +69,7 @@ export class DetailsComponent implements OnInit {
         if(data.some(this.searchInData, info) == false){
             return true;
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     private searchInData(data){

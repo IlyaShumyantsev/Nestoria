@@ -128,68 +128,126 @@ export class SearchComponent implements OnInit{
     }
 
     private countryFilter(){
-        if(this.country === "UK" || this.country === "uk"){
-            this.country = "co.uk";
-        }
-        else if(this.country === "Spain"){
-            this.country = "es";
-        }
-        else if(this.country === "Germany"){
-            this.country = "de";
-        }
-        else if(this.country === "France"){
-            this.country = "fr";
-        }
-        else if(this.country === "Chile"){
-            this.country = "cl";
-        }
-        else if(this.country === "Mexico"){
-            this.country = "mx";
-        }
-        else if(this.country === "Brazil" || this.country === "br"){
-            this.country = "com.br";
-        }
-        else if(this.country === "India"){
-            this.country = "in";
-        }
-        else if(this.country === "Peru"){
-            this.country = "pe";
-        }
-        else if(this.country === "Australia" || this.country === "au"){
-            this.country = "com.au";
-        }
-        else if(this.country === "Philippines" || this.country === "ph"){
-            this.country = "com.ph";
-        }
-        else if(this.country === "Poland"){
-            this.country = "pl";
-        }
-        else if(this.country === "Austria"){
-            this.country = "at";
-        }
-        else if(this.country === "Emirates"){
-            this.country = "ae";
-        }
-        else if(this.country === "Italy"){
-            this.country = "it";
-        }
-        else if(this.country === "Switzerland"){
-            this.country = "ch";
-        }
-        else if(this.country === "Turkey" || this.country === "tr"){
-            this.country = "com.tr";
-        }
-        else if(this.country === "Portugal"){
-            this.country = "pt";
-        }
-        else if(this.country === "Argentina" || this.country === "ar"){
-            this.country = "com.ar";
-        }
-        else if(this.country === "Colombia" || this.country === "co"){
-            this.country = "com.co";
-        }
-        else if(this.country === "Indonesia" || this.country === "id"){
-            this.country = "co.id";
+        switch(this.country){
+            case "UK":{
+                this.country = "co.uk";
+                break;
+            }
+            case "uk":{
+                this.country = "co.uk";
+                break;
+            }
+            case "Spain":{
+                this.country = "es";
+                break;
+            }
+            case "Germany":{
+                this.country = "de";
+                break;
+            }
+            case "France":{
+                this.country = "fr";
+                break;
+            }
+            case "Chile":{
+                this.country = "cl";
+                break;
+            }
+            case "Mexico":{
+                this.country = "mx";
+                break;
+            }
+            case "Brazil":{
+                this.country = "com.br";
+                break;
+            }
+            case "br":{
+                this.country = "com.br";
+                break;
+            }
+            case "India":{
+                this.country = "in";
+                break;
+            }
+            case "Peru":{
+                this.country = "pe";
+                break;
+            }
+            case "Australia":{
+                this.country = "com.au";
+                break;
+            }
+            case "au":{
+                this.country = "com.au";
+                break;
+            }
+            case "Philippines":{
+                this.country = "com.ph";
+                break;
+            }
+            case "ph":{
+                this.country = "com.ph";
+                break;
+            }
+            case "Poland":{
+                this.country = "pl";
+                break;
+            }
+            case "Austria":{
+                this.country = "at";
+                break;
+            }
+            case "Emirates":{
+                this.country = "ae";
+                break;
+            }
+            case "Italy":{
+                this.country = "it";
+                break;
+            }
+            case "Switzerland":{
+                this.country = "ch";
+                break;
+            }
+            case "Turkey":{
+                this.country = "com.tr";
+                break;
+            }
+            case "tr":{
+                this.country = "com.tr";
+                break;
+            }
+            case "Portugal":{
+                this.country = "pt";
+                break;
+            }
+            case "Argentina":{
+                this.country = "com.ar";
+                break;
+            }
+            case "ar":{
+                this.country = "com.ar";
+                break;
+            }
+            case "Colombia":{
+                this.country = "com.co";
+                break;
+            }
+            case "co":{
+                this.country = "com.co";
+                break;
+            }
+            case "Indonesia":{
+                this.country = "co.id";
+                break;
+            }
+            case "id":{
+                this.country = "co.id";
+                break;
+            }
+            default:{
+                break;
+            }
         }
     }
 

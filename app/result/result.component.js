@@ -13,7 +13,6 @@ var core_1 = require("@angular/core");
 var ResultComponent = /** @class */ (function () {
     function ResultComponent() {
         this.title = "Recent searches: ";
-        this.step = -1;
     }
     ResultComponent.prototype.ngOnInit = function () {
         this.data = JSON.parse(localStorage.getItem("searchRes"));

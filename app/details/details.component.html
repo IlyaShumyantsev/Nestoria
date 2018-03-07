@@ -7,10 +7,10 @@
 <div class="detail-info">
     <div class="picture" [ngStyle]="{'background-image': 'url(' + info.img_url +')'}">
         <span class="price">{{info.price_formatted}}</span>
-        <div *ngIf="ngOnInit() == true">
+        <div *ngIf="favesStatus() == true">
             <button [ngClass]="{toFavesPressed:true}" (click)="addFaves()"></button>
         </div>
-        <div *ngIf="ngOnInit() == false">
+        <div *ngIf="favesStatus() == false">
             <button [ngClass]="{toFaves:true}" (click)="addFaves()"></button>
         </div>
     </div>
